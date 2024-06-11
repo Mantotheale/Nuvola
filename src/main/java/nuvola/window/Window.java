@@ -1,20 +1,23 @@
-package nuvola;
+package nuvola.window;
 
+import org.jetbrains.annotations.NotNull;
+import org.lwjgl.glfw.GLFWKeyCallbackI;
 import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
-public class Window {
-    public static Window INSTANCE = new Window();
-    private static int initialWidth = 1080;
-    private static int initialHeight = 720;
-
+public class Window implements IWindow {
     private long id;
+    private final String title;
     private int width;
     private int height;
 
-    private Window() { }
+    public Window(String title, int width, int height) {
+        this.width = width;
+        this.height = height;
+        this.title = title;
+    }
 
     public void init() {
         if (!glfwInit()) throw new RuntimeException("Couldn't initialize GLFW");
@@ -23,13 +26,13 @@ public class Window {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-        width = initialWidth;
-        height = initialHeight;
-        id = glfwCreateWindow(width, height, "Game", 0, 0);
+        id = glfwCreateWindow(width, height, title, 0, 0);
 
         if (id == 0) throw new RuntimeException("Failed to open a window");
 
         glfwMakeContextCurrent(id);
+        glfwSwapInterval(1);
+
         GL.createCapabilities();
         glViewport(0, 0, width, height);
     }
@@ -50,11 +53,17 @@ public class Window {
         return glfwWindowShouldClose(id);
     }
 
-    public int getWidth() {
+    @Override
+    public int width() {
         return width;
     }
 
-    public int getHeight() {
+    @Override
+    public int height() {
         return height;
+    }
+
+    public void setKeyCallback(@NotNull GLFWKeyCallbackI keyCallback) {
+        glfwSetKeyCallback(id, keyCallback);
     }
 }

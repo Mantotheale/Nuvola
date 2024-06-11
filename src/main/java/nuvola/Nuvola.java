@@ -1,14 +1,15 @@
 package nuvola;
 
-public class Nuvola {
-    public final static Nuvola INSTANCE = new Nuvola();
+import nuvola.window.IWindow;
 
-    private Window window;
+public class Nuvola implements Engine {
+    private final IWindow window;
 
-    private Nuvola() { }
+    public Nuvola(IWindow window) {
+        this.window = window;
+    }
 
     public void init() {
-        window = Window.INSTANCE;
         window.init();
     }
 
@@ -24,7 +25,7 @@ public class Nuvola {
         window.shutdown();
     }
 
-    public boolean shouldClose() {
+    private boolean shouldClose() {
         return window.shouldClose();
     }
 }

@@ -1,9 +1,8 @@
-package nuvola.systems.inputsystem.inputlistener;
+package nuvola.systems.inputmanager.inputlistener;
 
 import nuvola.interfaces.Observable;
 import nuvola.interfaces.Observer;
-import nuvola.systems.inputsystem.input.Input;
-import nuvola.window.Window;
+import nuvola.systems.inputmanager.input.Input;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -30,5 +29,5 @@ public abstract class InputListener implements Observable<Input> {
         }
     }
 
-    @NotNull public abstract Input lastInput();
+    @NotNull protected abstract Input lastInput();
 }

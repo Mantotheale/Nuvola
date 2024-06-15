@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
-public class Window implements IWindow {
+public class Window {
     private long id;
     private final String title;
     private int width;
@@ -17,9 +17,7 @@ public class Window implements IWindow {
         this.width = width;
         this.height = height;
         this.title = title;
-    }
 
-    public void init() {
         if (!glfwInit()) throw new RuntimeException("Couldn't initialize GLFW");
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -53,12 +51,10 @@ public class Window implements IWindow {
         return glfwWindowShouldClose(id);
     }
 
-    @Override
     public int width() {
         return width;
     }
 
-    @Override
     public int height() {
         return height;
     }

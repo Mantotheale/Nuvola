@@ -1,15 +1,18 @@
 package nuvola;
 
+import nuvola.systems.inputsystem.inputlistener.InputListener;
+import nuvola.systems.inputsystem.inputlistener.KeyListener;
 import nuvola.window.Window;
-import nuvola.window.IWindow;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 public class Main {
     public static void main(String[] args) {
-        IWindow window = new Window("GameEngine", 1080, 720);
+        Window window = new Window("Trial", 1920, 1080);
+        InputListener listener = new KeyListener(window);
 
-        Engine engine = new Nuvola(window);
-        engine.init();
-        engine.run();
-        engine.shutdown();
+        while (!window.shouldClose()) {
+            glfwPollEvents();
+        }
     }
 }

@@ -1,17 +1,16 @@
 package nuvola;
 
-import nuvola.window.IWindow;
 
-public class Nuvola implements Engine {
-    private final IWindow window;
+import nuvola.window.Window;
 
-    public Nuvola(IWindow window) {
+public class Nuvola {
+    private final Window window;
+    private boolean shouldClose = false;
+
+    public Nuvola(Window window) {
         this.window = window;
     }
 
-    public void init() {
-        window.init();
-    }
 
     public void run() {
         while (!shouldClose()) {
@@ -25,7 +24,11 @@ public class Nuvola implements Engine {
         window.shutdown();
     }
 
+    public void signalClose() {
+        shouldClose = true;
+    }
+
     private boolean shouldClose() {
-        return window.shouldClose();
+        return shouldClose || window.shouldClose();
     }
 }

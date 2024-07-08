@@ -1,6 +1,7 @@
 package nuvola.managers.rendermanager.buffer.vertex;
 
 import nuvola.managers.rendermanager.buffer.vertex.attribute.VertexAttribute;
+import nuvola.managers.rendermanager.buffer.vertex.layout.LayoutEntry;
 import nuvola.managers.rendermanager.buffer.vertex.layout.VertexLayout;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.system.MemoryUtil;

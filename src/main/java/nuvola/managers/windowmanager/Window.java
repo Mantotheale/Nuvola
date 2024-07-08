@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glViewport;
 
 public class Window {
     private long id;
@@ -57,16 +58,18 @@ public class Window {
         glfwSwapBuffers(id);
     }
 
-    public boolean shouldClose() {
-        return glfwWindowShouldClose(id);
-    }
-
     public int width() {
         return width;
     }
 
     public int height() {
         return height;
+    }
+
+    public void setSize(int width, int height) {
+        glViewport(0, 0, width, height);
+        this.width = width;
+        this.height = height;
     }
 
     public void setKeyCallback(@NotNull GLFWKeyCallbackI keyCallback) {
@@ -87,5 +90,9 @@ public class Window {
 
     public void setCloseCallback(@NotNull GLFWWindowCloseCallbackI closeCallback) {
         glfwSetWindowCloseCallback(id, Objects.requireNonNull(closeCallback));
+    }
+
+    public void setWindowSizeCallback(@NotNull GLFWWindowSizeCallbackI sizeCallback) {
+        glfwSetWindowSizeCallback(id, Objects.requireNonNull(sizeCallback));
     }
 }

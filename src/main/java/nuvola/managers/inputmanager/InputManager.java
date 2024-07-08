@@ -13,25 +13,19 @@ import java.util.Objects;
 import java.util.Queue;
 
 public class InputManager implements Observer<Input> {
-    @NotNull private final InputCommandMapping mapping = new InputCommandMapping();
     @NotNull private final Queue<Command> frameCommands = new ArrayDeque<>();
+    @NotNull private final InputCommandMapping mapping;
 
-    public InputManager(List<Observable<Input>> subjects) {
+    public InputManager(List<Observable<Input>> subjects, @NotNull InputCommandMapping mapping) {
         for (Observable<Input> subject: subjects)
             subject.addObserver(this);
+
+        this.mapping = mapping;
     }
 
     @Override
     public void update(@NotNull Input value) {
         frameCommands.add(mapping.convertInput(value));
-    }
-
-    public void addMapping(@NotNull Input input, @NotNull Command command) {
-        mapping.addMapping(Objects.requireNonNull(input), Objects.requireNonNull(command));
-    }
-
-    public void removeMapping(@NotNull Input input) {
-        mapping.removeMapping(input);
     }
 
     @NotNull public Queue<Command> getCommands() {

@@ -8,4 +8,7 @@ import java.nio.ByteBuffer;
 public interface VertexAttribute {
     @NotNull ByteBuffer data();
     @NotNull AttributeLayout layout();
+    default int size() {
+        return layout().size();
+    }
 }

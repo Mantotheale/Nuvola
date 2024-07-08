@@ -43,8 +43,8 @@ public class Mesh {
             Texture texture = textures.get(i);
             String name = textureNames.get(i);
 
-            texture.bind();
-            shader.setUniform(name, texture.id());
+            texture.bind(i);
+            shader.setUniform(name, i);
         }
 
         shader.bind();

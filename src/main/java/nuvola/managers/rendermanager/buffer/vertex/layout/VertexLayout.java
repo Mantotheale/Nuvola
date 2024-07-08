@@ -36,7 +36,7 @@ public class VertexLayout implements Iterable<LayoutEntry> {
             else
                 entries.add(new LayoutEntry(
                         Objects.requireNonNull(l),
-                        NuvolaLists.getLast(entries).offset() + l.size()
+                        NuvolaLists.getLast(entries).offset() + NuvolaLists.getLast(entries).size()
                 ));
         }
 

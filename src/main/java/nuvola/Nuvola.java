@@ -50,6 +50,6 @@ public class Nuvola implements Engine {
     }
 
     private boolean shouldClose() {
-        return shouldClose || window.shouldClose();
+        return shouldClose;
     }
 }

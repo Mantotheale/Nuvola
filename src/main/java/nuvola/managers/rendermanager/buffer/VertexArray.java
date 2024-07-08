@@ -25,7 +25,7 @@ public class VertexArray {
 
         int i = 0;
         for (LayoutEntry entry: Objects.requireNonNull(layout)) {
-            glVertexAttribPointer(i, entry.count(), entry.glType().openglEnum(), false, entry.size(), entry.offset());
+            glVertexAttribPointer(i, entry.count(), entry.glType().openglEnum(), false, layout.size(), entry.offset());
             glEnableVertexAttribArray(i);
             i++;
         }

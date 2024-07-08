@@ -5,6 +5,7 @@ import nuvola.command.CloseGameCommand;
 import nuvola.command.Command;
 import nuvola.managers.inputmanager.input.KeyInput;
 import nuvola.managers.inputmanager.inputlistener.*;
+import nuvola.managers.rendermanager.RenderManager;
 import nuvola.managers.windowmanager.Window;
 
 import java.util.List;
@@ -17,12 +18,14 @@ public class Main {
         InputListener mouseListener = new MouseListener(window);
         InputListener scrollListener = new ScrollListener(window);
 
-        InputManager manager = new InputManager(List.of(keyListener, clickListener, mouseListener, scrollListener));
+        InputManager inputManager = new InputManager(List.of(keyListener, clickListener, mouseListener, scrollListener));
 
-        Engine engine = new Nuvola(window, manager);
+        RenderManager renderManager = new RenderManager();
+
+        Engine engine = new Nuvola(window, inputManager, renderManager);
 
         Command closeCommand = new CloseGameCommand(engine);
-        manager.addMapping(new KeyInput(256, 1, 0), closeCommand);
+        inputManager.addMapping(new KeyInput(256, 1, 0), closeCommand);
 
         engine.run();
         engine.shutdown();

@@ -21,7 +21,6 @@ public class InputCommandMapping {
     }
 
     @NotNull public Command convertInput(@NotNull Input input) {
-        System.out.println(input);
         return mapping.getOrDefault(input, new NoCommand());
     }
 }

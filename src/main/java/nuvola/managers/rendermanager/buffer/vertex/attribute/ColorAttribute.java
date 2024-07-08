@@ -13,8 +13,8 @@ public record ColorAttribute(@NotNull Vector3f color) implements VertexAttribute
         this.color = new Vector3f(Objects.requireNonNull(color));
     }
 
-    public ColorAttribute(float x, float y, float z) {
-        this(new Vector3f(x, y, z));
+    public ColorAttribute(float r, float g, float b) {
+        this(new Vector3f(r, g, b));
     }
 
     @Override

@@ -45,6 +45,14 @@ public class Window {
         glfwPollEvents();
     }
 
+    public void setClearColor(float r, float g, float b) {
+        glClearColor(r, g, b, 1);
+    }
+
+    public void clearColorBuffer() {
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
+
     public void swapBuffers() {
         glfwSwapBuffers(id);
     }

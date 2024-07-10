@@ -12,6 +12,7 @@ import static org.lwjgl.opengl.GL20.glGetShaderInfoLog;
 public abstract class Shader {
     private final int id;
     @NotNull private final ShaderType type;
+
     private boolean isDeleted;
 
     protected Shader(@NotNull ShaderType type, @NotNull String pathString) {
@@ -23,9 +24,8 @@ public abstract class Shader {
         glShaderSource(id, content);
         glCompileShader(id);
 
-        if(glGetShaderi(id, GL_COMPILE_STATUS) == GL_FALSE)
+        if (glGetShaderi(id, GL_COMPILE_STATUS) == GL_FALSE)
             throw new RuntimeException(glGetShaderInfoLog(id));
-
         isDeleted = false;
     }
 

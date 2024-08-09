@@ -2,9 +2,7 @@ package nuvola.mapping;
 
 import nuvola.command.Command;
 import nuvola.command.NoCommand;
-import nuvola.command.ResizeWindowCommand;
 import nuvola.managers.inputmanager.input.Input;
-import nuvola.managers.inputmanager.input.ResizeWindowInput;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

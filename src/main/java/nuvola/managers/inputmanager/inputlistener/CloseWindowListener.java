@@ -1,21 +1,19 @@
 package nuvola.managers.inputmanager.inputlistener;
 
-import nuvola.managers.inputmanager.input.ClickInput;
-import nuvola.managers.inputmanager.input.CloseWindowInput;
 import nuvola.managers.inputmanager.input.Input;
-import nuvola.managers.inputmanager.input.NoInput;
 import nuvola.managers.windowmanager.Window;
 import org.jetbrains.annotations.NotNull;
 
 public class CloseWindowListener extends InputListener {
-    @NotNull private Input lastInput = new NoInput();
+    @NotNull private Input lastInput = new Input.NoInput();
+    private final Window window;
 
     public CloseWindowListener(@NotNull Window window) {
-        window.setCloseCallback(this::closeWindow);
+        window.setCloseCallback(this::closeWindow); this.window = window;
     }
 
     public void closeWindow(long window) {
-        lastInput = new CloseWindowInput();
+        lastInput = new Input.CloseWindowInput(this.window);
 
         notifyObservers();
     }

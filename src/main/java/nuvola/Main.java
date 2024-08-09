@@ -4,9 +4,7 @@ import nuvola.command.ResizeWindowCommand;
 import nuvola.managers.inputmanager.InputManager;
 import nuvola.command.CloseGameCommand;
 import nuvola.command.Command;
-import nuvola.managers.inputmanager.input.CloseWindowInput;
-import nuvola.managers.inputmanager.input.KeyInput;
-import nuvola.managers.inputmanager.input.ResizeWindowInput;
+import nuvola.managers.inputmanager.input.Input;
 import nuvola.managers.inputmanager.inputlistener.*;
 import nuvola.managers.rendermanager.Mesh;
 import nuvola.managers.rendermanager.RenderComponent;
@@ -51,11 +49,11 @@ public class Main {
         Engine engine = new Nuvola(window, inputManager, renderManager);
 
         Command closeCommand = new CloseGameCommand(engine);
-        mapping.addMapping(new KeyInput(256, 1, 0), closeCommand);
-        mapping.addMapping(new CloseWindowInput(), closeCommand);
+        mapping.addMapping(new Input.KeyInput(256, 1, 0), closeCommand);
+        mapping.addMapping(new Input.CloseWindowInput(window), closeCommand);
         mapping.addDynamicMapping(
-                ResizeWindowInput.class,
-                input ->  new ResizeWindowCommand(window, ((ResizeWindowInput) input).width,  ((ResizeWindowInput) input).height)
+                Input.ResizeWindowInput.class,
+                input ->  new ResizeWindowCommand(window, ((Input.ResizeWindowInput) input).width(),  ((Input.ResizeWindowInput) input).height())
         );
 
         engine.run();

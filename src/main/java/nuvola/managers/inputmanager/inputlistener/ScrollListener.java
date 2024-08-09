@@ -1,20 +1,18 @@
 package nuvola.managers.inputmanager.inputlistener;
 
 import nuvola.managers.inputmanager.input.Input;
-import nuvola.managers.inputmanager.input.NoInput;
-import nuvola.managers.inputmanager.input.ScrollInput;
 import nuvola.managers.windowmanager.Window;
 import org.jetbrains.annotations.NotNull;
 
 public class ScrollListener extends InputListener {
-    @NotNull private Input lastInput = new NoInput();
+    @NotNull private Input lastInput = new Input.NoInput();
 
     public ScrollListener(@NotNull Window window) {
         window.setScrollCallback(this::mouseScrolled);
     }
 
     public void mouseScrolled(long window, double xOffset, double yOffset) {
-        lastInput = new ScrollInput(yOffset);
+        lastInput = new Input.ScrollInput(yOffset);
 
         notifyObservers();
     }

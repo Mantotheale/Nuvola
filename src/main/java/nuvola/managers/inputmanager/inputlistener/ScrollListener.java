@@ -4,21 +4,14 @@ import nuvola.managers.inputmanager.input.Input;
 import nuvola.managers.windowmanager.Window;
 import org.jetbrains.annotations.NotNull;
 
-public class ScrollListener extends InputListener {
-    @NotNull private Input lastInput = new Input.NoInput();
+import java.util.Objects;
 
+public class ScrollListener extends InputListener {
     public ScrollListener(@NotNull Window window) {
-        window.setScrollCallback(this::mouseScrolled);
+         Objects.requireNonNull(window).setScrollCallback(this::mouseScrolled);
     }
 
     public void mouseScrolled(long window, double xOffset, double yOffset) {
-        lastInput = new Input.ScrollInput(yOffset);
-
-        notifyObservers();
-    }
-
-    @Override
-    @NotNull protected Input lastInput() {
-        return lastInput;
+        notifyObservers(new Input.ScrollInput(yOffset));
     }
 }

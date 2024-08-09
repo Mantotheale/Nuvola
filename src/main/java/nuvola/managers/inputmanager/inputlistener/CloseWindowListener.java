@@ -4,22 +4,14 @@ import nuvola.managers.inputmanager.input.Input;
 import nuvola.managers.windowmanager.Window;
 import org.jetbrains.annotations.NotNull;
 
-public class CloseWindowListener extends InputListener {
-    @NotNull private Input lastInput = new Input.NoInput();
-    private final Window window;
+import java.util.Objects;
 
+public class CloseWindowListener extends InputListener {
     public CloseWindowListener(@NotNull Window window) {
-        window.setCloseCallback(this::closeWindow); this.window = window;
+        Objects.requireNonNull(window).setCloseCallback(this::closeWindow);
     }
 
     public void closeWindow(long window) {
-        lastInput = new Input.CloseWindowInput(this.window);
-
-        notifyObservers();
-    }
-
-    @Override
-    @NotNull protected Input lastInput() {
-        return lastInput;
+        notifyObservers(new Input.CloseWindowInput());
     }
 }

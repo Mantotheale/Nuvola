@@ -1,33 +1,28 @@
 package nuvola.managers.inputmanager.inputlistener;
 
-import nuvola.interfaces.Observable;
-import nuvola.interfaces.Observer;
 import nuvola.managers.inputmanager.input.Input;
+import nuvola.managers.inputmanager.InputObserver;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class InputListener implements Observable<Input> {
-    @NotNull private final List<Observer<Input>> observers = new ArrayList<>();
+public abstract class InputListener {
+    @NotNull private final List<InputObserver> observers = new ArrayList<>();
 
-    @Override
-    public void addObserver(@NotNull Observer<Input> observer) {
+    public void addObserver(@NotNull InputObserver observer) {
         observers.add(Objects.requireNonNull(observer));
     }
 
-    @Override
-    public void removeObserver(@NotNull Observer<Input> observer) {
+    public void removeObserver(@NotNull InputObserver observer) {
         observers.remove(Objects.requireNonNull(observer));
     }
 
-    @Override
-    public void notifyObservers() {
-        for (Observer<Input> obs: observers) {
-            obs.update(lastInput());
-        }
-    }
+    public void notifyObservers(@NotNull Input input) {
+        Objects.requireNonNull(input);
 
-    @NotNull protected abstract Input lastInput();
+        for (InputObserver obs: observers)
+            obs.inputOccurred(input);
+    }
 }
